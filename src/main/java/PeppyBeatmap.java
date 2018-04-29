@@ -30,6 +30,34 @@ beatmap JSONObject
 	"max_combo"        : "2101"
  */
 public class PeppyBeatmap {
-//to be done
+    private PeppyApi api;
+    private int userId;
+    private String title;
+    private String artist;
+    JSONArray beatmapData;
+    ArrayList<JSONObject> beatmaps = new ArrayList<>();
+    public PeppyBeatmap(PeppyApi api, int id) {
+        try {
+            this.userId = id;
+            this.api = api;
+            beatmapData = api.getResponse("get_beatmaps?k=" + api.getTOKEN() + "&s=" + id);
+            for (int i = 0; i < beatmapData.length(); i++) {
+                beatmaps.add(beatmapData.getJSONObject(i));
+            }
+            System.out.println("Получено " + beatmaps.size() + " дифф");
+        } catch (Exception e) {
 
+//            Цикл пока (есть дифа)
+//            получить данные, следущяя дифа
+        }
+
+    }
+    void printBeatmapData(){
+        System.out.println(beatmapData.toString());
+        System.out.println(artist + " - " + title);
+        System.out.println("Mapset size: " + beatmaps.size());
+    }
+    void parseJSON(JSONObject a){
+//        this.username = userDataObj.get("username").toString();
+    }
 }
